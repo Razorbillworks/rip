@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/Model-Google_Gemma_2_(2B)-8A2BE2?style=flat-square" alt="Model" />
   <img src="https://img.shields.io/badge/Inference-Ollama_(Local)-black?style=flat-square" alt="Inference" />
   <img src="https://img.shields.io/badge/Privacy-100%25_Air--Gapped-success?style=flat-square" alt="Air Gapped" />
-  <img src="https://img.shields.io/badge/Hacktoberfest-Week_4_Winner-orange?style=flat-square" alt="Hacktoberfest" />
+  <img src="https://img.shields.io/badge/Hacktoberfest-Week_4-orange?style=flat-square" alt="Hacktoberfest" />
 </p>
 
 </div>
@@ -30,14 +30,12 @@ Every developer's drive hosts a quiet graveyard: incomplete prototypes, late-nig
 ### The Graveyard Gallery
 
 <div align="center">
-  <img src="assets/graveyard-demo.png" alt="Generated Code Cemetery Web View" width="100%" style="border-radius: 8px;" />
+  <img src="assets/graveyard-demo.png" alt="Generated Code Cemetery Web View" width="100%" />
 </div>
 
 ---
 
 ### Architecture & Open Innovation
-
-The challenge prompts why open innovation matters:
 
 - **Absolute Zero-Content Telemetry**: Proprietary APIs require uploading data off your machine. `rip` runs an open-weight foundation model locally; source code and file contents never touch the inference pipeline.
 - **Offline & Air-Gapped**: Runs entirely on local compute through Ollama. No network latency, rate quotas, or vendor lock-in.
@@ -59,6 +57,58 @@ The challenge prompts why open innovation matters:
 
 ### Installation & Setup
 
-1. **Verify Local Weights**
-   ```bash
-   ollama pull gemma2:2b
+**1. Pull the model weights**
+
+```bash
+ollama pull gemma2:2b
+```
+
+**2. Clone & prepare the environment**
+
+```bash
+git clone https://github.com/Razorbillworks/rip.git
+cd rip
+python -m venv venv
+```
+
+Activate the environment:
+
+- Windows: `.\venv\Scripts\Activate.ps1`
+- Linux/macOS: `source venv/bin/activate`
+
+**3. Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### Usage
+
+Scan a directory for items untouched for more than 30 days:
+
+```bash
+python rip.py "C:\path\to\projects" --days 30
+```
+
+Enable the Día de los Muertos Ofrenda mode for resurrection hints:
+
+```bash
+python rip.py "C:\path\to\projects" --days 15 --ofrenda --out cemetery.html
+```
+
+---
+
+### CLI Reference
+
+```text
+positional arguments:
+  path              Target directory to scan (default: current working dir)
+
+options:
+  --days INT        Dormancy threshold in days (default: 30)
+  --model STR       Ollama model tag (default: gemma2:2b)
+  --ofrenda         Generate constructive resurrection hints
+  --out STR         HTML cemetery output path (default: cemetery.html)
+```
